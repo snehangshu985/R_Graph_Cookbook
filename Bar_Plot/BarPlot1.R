@@ -17,7 +17,7 @@ barplot(height = demand, names.arg = Time)
 detach(df)
 
 #-------------------------------------------------------------
-#                       Barplot using GGPLOT package
+# 3.1 Barplot using GGPLOT package
 #-------------------------------------------------------------
 
 library(ggplot2)
@@ -38,7 +38,7 @@ table(mtcars$cyl)
 ggplot(mtcars, aes(factor(cyl))) + geom_bar()
 
 #--------------------------------------------------------------------------
-# grouping bars together, stacked side by side
+# 3.2 grouping bars together, stacked side by side
 #--------------------------------------------------------------------------
 
 # install.packages("gcookbook")
@@ -54,7 +54,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
     geom_col(position = "dodge", color = "black", size = 1.0)
 
 #-----------------------------------------------------------------------
-# Creating Bar plot for Count
+# 3.3 Creating Bar plot for Count
 #-----------------------------------------------------------------------
 
 # the default stat in geom_bar() will be count
@@ -65,7 +65,7 @@ ggplot(diamonds, aes(x = cut)) + geom_bar()
 
 
 #-----------------------------------------------------------------------
-# Fill bar by mapping
+# 3.4 Fill bar by mapping
 #-----------------------------------------------------------------------
 library(gcookbook) # Load gcookbook for the uspopchange data set
 library(dplyr)
@@ -76,7 +76,7 @@ ggplot(upc, aes(x = Abb, y = Change, pattern = Region, fill=Region)) +
     geom_col_pattern() 
 
 #-----------------------------------------------------------------------
-# Adjusting Bar Width and Spacing
+# 3.6 Adjusting Bar Width and Spacing
 #-----------------------------------------------------------------------
 # Load gcookbook for the pg_mean data set
 # default width which is 0.9
@@ -90,9 +90,48 @@ ggplot(pg_mean, aes(x = group, y = weight)) + geom_col(width = 0.5)
 ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
     geom_col(width = 0.5, position = position_dodge(0.7))
 
+#-----------------------------------------------------------------------
+# 3.7 Making a Stacked Bar Graph
+#-----------------------------------------------------------------------
+
+# this is the default bhavoir for geom_col()
+# in geom_col(), specify x,y in aes(), and fill by the third variable
+
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+    geom_col()
+
+#-----------------------------------------------------------------------
+# 3.8 Making a Proportional Stacked Bar Graph
+#-----------------------------------------------------------------------
+
+# in the geom_col position = "fill" will normalize the graph height to 1.0
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+    geom_col(position = "fill")
+
+# to make y scale in percent the following code will work
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+    geom_col(position = "fill") + 
+    scale_y_continuous(labels = scales::percent)
+
+#-----------------------------------------------------------------------
+# 3.9 Adding Labels to a Bar Graph
+#-----------------------------------------------------------------------
+
+# geom_text used for labeling
+# the label variable need to in aes()
 
 
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+    geom_col(position = "dodge") +
+    geom_text(aes(label = Weight), colour = "black", 
+              vjust = 1.5, position = position_dodge(.9))
 
+
+# if the position is stacked
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+    geom_col() +
+    geom_text(aes(label = Weight), colour = "black", 
+              vjust = 1.5, position = position_stack())
 
 
 
