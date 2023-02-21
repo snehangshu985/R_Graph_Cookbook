@@ -1,0 +1,39 @@
+---
+title: "Scatter Plot"
+author: "Snehangshu Roy"
+date: '2023-02-15'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Basic Scatter Plot
+
+geom_points() is the main function that make the scatter plot of two continuous variable. In the following example the scatter plot from the data set of heightweit {gcookbook} is used.
+
+```{r, warning=FALSE, message=FALSE}
+    
+library(ggplot2)
+library(dplyr)
+library(gcookbook)
+
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn)) +
+        geom_point()
+```
+
+### Grouping Points Together using Shapes or Colors
+
+visually group points by some variable (the grouping variable), using different shapes or colors. 
+
+```{r, warning=FALSE, message=FALSE}
+ggplot(heightweight, aes(x = ageYear, y = heightIn )) +
+    geom_point(aes(colour = sex, shape = sex))
+```
+
+
+##                           END
+
+
