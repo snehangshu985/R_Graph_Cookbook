@@ -115,7 +115,7 @@ pg_plot +
     )
 
 #===============================================================================
-# 10.6 Changing the Appearance of a Legend Title
+# 10.7 Removing a Legend Title
 #===============================================================================
 # Add guides(fill = guide_legend(title = NULL)) ...
 # to remove the title from a legend
@@ -130,6 +130,50 @@ pg_plot <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
 
 pg_plot +
     theme(legend.title = element_blank())
+
+
+#===============================================================================
+# 10.8 Changing the Labels in a Legend
+#===============================================================================
+# Set the labels in the scale ... in scale_fill_discrete()
+
+# The base plot
+pg_plot <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+    geom_boxplot()
+
+# changing legends title in scale_fill_discrete ()
+# changing x tick labels in scale_x_discrete ()
+# changing the legen title in labs()
+
+pg_plot + scale_fill_discrete(labels = c("Control", 
+                                         "Treatment1", 
+                                         "Treatment 2")) +
+    scale_x_discrete(labels = c("Contrl", 
+                                "Treatment1", 
+                                "Treatment 2")) +
+    labs(fill = "Treatment Type")
+
+
+#===============================================================================
+# 10.8 Changing the Labels in a Legend
+#===============================================================================
+# Use theme(legend.text=element_text())
+
+# Create the base plot
+pg_plot <- ggplot(PlantGrowth, aes(x = group, y = weight, fill = group)) +
+    geom_boxplot()
+
+pg_plot +
+    theme(legend.text = element_text(
+        face = "italic",
+        colour = "red",
+        size = 14)
+    )
+
+
+
+
+
 
 
 
