@@ -77,7 +77,36 @@ mpg_plot +
     facet_grid(drv ~ cyl, scales = "free")
 
 
+#=============================================================================
+# 11.3 Changing the Text of Facet Labels
+#=============================================================================
+# Change the names of the factor levels
 
+# Make a modified copy of the original data
+mpg_mod <- mpg %>%
+    # Rename 4 to 4wd, f to Front, r to Rear
+    mutate(drv = recode(drv, "4" = "4wd", "f" = "Front", "r" = "Rear"))
+
+
+
+ggplot(mpg_mod, aes(x = displ, y = hwy)) +
+    geom_point() +
+    facet_grid(drv ~ .)
+
+
+#=============================================================================
+# 11.4 Changing the Appearance of Facet Labels and Headers
+#=============================================================================
+# set strip.text to control the text appearance and ...
+# strip.background to control the background appearance
+
+ggplot(cabbage_exp, aes(x = Cultivar, y = Weight)) +
+    geom_col() +
+    facet_grid(. ~ Date) +
+    theme(
+        strip.text = element_text(face = "bold", size = rel(1.5)),
+        strip.background = element_rect(fill = "lightblue", colour = "black", size = 1)
+    )
 
 
 
